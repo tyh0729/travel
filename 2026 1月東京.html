@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 東京 10D9N 行程表 (回程13:20修正版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+        body { font-family: 'Noto+Sans+TC', sans-serif; background-color: #ffffff; color: #333; }
+        .tab-active { border-bottom: 3px solid #ef4444; color: #ef4444; font-weight: bold; }
+        .timeline-line::before {
+            content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #f3f4f6;
+        }
+        .map-chip { background: #fef2f2; border: 1px solid #fee2e2; color: #ef4444; font-size: 12px; padding: 6px 12px; border-radius: 99px; text-decoration: none; display: inline-block; transition: 0.2s; }
+        .map-chip:hover { background: #fee2e2; transform: translateY(-2px); }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <nav class="sticky top-0 z-50 bg-white shadow-sm border-b">
+        <div class="max-w-4xl mx-auto px-4 flex justify-around h-16 items-center">
+            <button onclick="showSection('summary')" id="btn-summary" class="nav-btn tab-active py-2 px-4">總覽預算 & 全區地圖</button>
+            <button onclick="showSection('daily')" id="btn-daily" class="nav-btn py-2 px-4">10日行程美食</button>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto p-4 py-8">
+
+        <section id="sec-summary" class="space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <h2 class="text-xl font-bold mb-4 flex items-center"><span class="text-red-500 mr-2">📍</span> 10 天景點區域地圖</h2>
+                <div class="flex flex-wrap gap-2">
+                    <a href="https://www.google.com/maps/dir/新倉山淺間公園/下吉田站/大石公園" target="_blank" class="map-chip">D2 河口湖景點路徑</a>
+                    <a href="https://www.google.com/maps/search/川越+時之鐘+冰川神社" target="_blank" class="map-chip">D3 川越老街地圖</a>
+                    <a href="https://www.google.com/maps/search/輕井澤+雲場池+王子Outlet" target="_blank" class="map-chip">D4 輕井澤分佈</a>
+                    <a href="https://www.google.com/maps/search/橫濱+紅磚倉庫+合味道紀念館" target="_blank" class="map-chip">D5 橫濱港路線</a>
+                    <a href="https://www.google.com/maps/search/SHIBUYA+SKY+明治神宮" target="_blank" class="map-chip">D6 澀谷原宿地圖</a>
+                    <a href="https://www.google.com/maps/dir/長谷寺/鎌倉大佛/鎌倉高校前/江之島" target="_blank" class="map-chip">D7 鎌倉江之島路徑</a>
+                    <a href="https://www.google.com/maps/search/淺草寺+雷門+晴空塔" target="_blank" class="map-chip">D8 淺草晴空塔</a>
+                    <a href="https://www.google.com/maps/search/豪德寺+下北澤+代官山" target="_blank" class="map-chip">D9 東京雜貨路線</a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="font-bold mb-3 text-red-500">💰 預算摘要 (每人 NT$28,876)</h3>
+                    <div class="h-48"><canvas id="budgetChart"></canvas></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center">
+                    <h3 class="font-bold mb-3 text-gray-700">✈️ 航班更新</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-400 pl-3">
+                            <p class="text-xs text-gray-400">去程 01/10 (六)</p>
+                            <p class="font-bold text-sm">CI126 13:05 高雄 → 17:25 成田</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-3">
+                            <p class="text-xs text-gray-400 font-bold text-red-500">回程 01/19 (一) *更新*</p>
+                            <p class="font-bold text-sm text-red-600">CI127 13:20 成田 → 16:50 高雄</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-daily" class="hidden">
+            <div class="mb-6 sticky top-20 z-40 bg-white p-2 rounded-lg shadow-sm border">
+                <select id="dayPicker" onchange="renderDay(this.value)" class="w-full p-2 font-bold text-gray-700 outline-none"></select>
+            </div>
+            
+            <div id="dayContent" class="space-y-8">
+                <div id="timeline" class="relative pl-10 timeline-line space-y-6"></div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="font-bold text-gray-800 mb-4 flex items-center">🍴 區域美食推薦 (5 選 1)</h3>
+                    <div id="foodList" class="space-y-2"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const itineraryData = [
+            { day: 1, date: "01/10 (六)", title: "抵達池袋", events: [{t:"17:25", s:"成田機場", d:"抵達後搭乘Skyliner前往池袋"}, {t:"20:00", s:"Uhome Suite 入住", d:"辦理入住並在池袋車站周邊晚餐"}], foods: ["和幸豬排 池袋PARCO","屯京拉麵 池袋本店","無敵家拉麵","利久牛舌 池袋Esola","雞之穴 雞白湯"] },
+            { day: 2, date: "01/11 (日)", title: "富士山河口湖", events: [{t:"07:10", s:"池袋巴士站", d:"搭乘西武觀光巴士前往富士山"}, {t:"10:00", s:"下吉田地區", d:"新倉山淺間公園、本町通拍照"}, {t:"15:00", s:"河口湖畔", d:"大石公園、天上山纜車"}], foods: ["餺飥不動 東戀路店","富士天婦羅 Idaten","Lake Side Cafe","名代豬排 池袋","壽司常 池袋"] },
+            { day: 3, date: "01/12 (一)", title: "川越小江戶", events: [{t:"10:00", s:"川越市站", d:"使用東武券開始行程"}, {t:"13:00", s:"藏造老街", d:"時之鐘、冰川神社釣鯛魚"}], foods: ["小川菊鰻魚飯","頑者沾麵","林屋鰻魚飯","星乃珈琲店","炸牛元村 池袋"] },
+            { day: 4, date: "01/13 (二)", title: "輕井澤度假", events: [{t:"09:30", s:"輕井澤站", d:"租借單車漫遊雲場池、老街"}, {t:"15:00", s:"王子 Outlet", d:"滑雪場旁大型購物中心"}], foods: ["川上庵 蕎麥麵","ろぐ亭 燒肉","澤村 SAWAMURA","王子美食街","美登利壽司 池袋"] },
+            { day: 5, date: "01/14 (三)", title: "橫濱海港", events: [{t:"11:00", s:"合味道紀念館", d:"製作專屬杯麵"}, {t:"16:00", s:"橫濱紅磚倉庫", d:"搭乘纜車欣賞港灣夜景"}], foods: ["橫濱中華街 萬珍樓","bills 鬆餅","三浦三崎港壽司","AFURI 柚子鹽拉麵","燒肉房家 池袋"] },
+            { day: 6, date: "01/15 (四)", title: "澀谷/原宿/Sky", events: [{t:"11:00", s:"明治神宮", d:"原宿竹下通逛街"}, {t:"17:00", s:"SHIBUYA SKY", d:"俯瞰澀谷十字路口夜景"}], foods: ["敘敘苑燒肉 池袋","Luke's Lobster","梅丘壽司美登利","一蘭拉麵 澀谷","Harbs 水果千層"] },
+            { day: 7, date: "01/16 (五)", title: "鎌倉/江之島", events: [{t:"10:30", s:"長谷寺/大佛", d:"鎌倉高校前平交道拍照"}, {t:"16:30", s:"江之島", d:"展望燈塔看日落"}], foods: ["江之島 吻仔魚丼","珊瑚礁咖哩","豐島屋和菓子","炸豬排大吉 池袋","松屋"] },
+            { day: 8, date: "01/17 (六)", title: "淺草/晴空塔", events: [{t:"10:00", s:"淺草寺雷門", d:"仲見世通、觀景台"}, {t:"15:00", s:"晴空塔", d:"Solamachi 逛街採購"}], foods: ["淺草今半 壽喜燒","淺草 大黑家","備長 鰻魚飯","淺草 龜十銅鑼燒","燒肉王 池袋"] },
+            { day: 9, date: "01/18 (日)", title: "豪德寺/下北澤", events: [{t:"10:00", s:"豪德寺", d:"數千隻招財貓絕景"}, {t:"14:00", s:"下北澤", d:"古著與特色雜貨巡禮"}], foods: ["白鬍子龍貓泡芙","下北澤 湯咖哩","IVY PLACE","築地虎杖海鮮丼","喫茶 You 蛋包飯"] },
+            { day: 10, date: "01/19 (一)", title: "最後巡禮/返台", events: [{t:"09:00", s:"池袋最後補貨", d:"把握最後時間購買伴手禮"}, {t:"10:30", s:"前往機場", d:"建議10:30前從池袋出發"}, {t:"13:20", s:"成田機場起飛", d:"CI127 回程高雄"}], foods: ["機場和幸豬排","機場京辰壽司","機場便利商店","機上餐","博多拉麵 一風堂"] }
+        ];
+
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(`sec-${id}`).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('tab-active'));
+            document.getElementById(`btn-${id}`).classList.add('tab-active');
+            if(id === 'summary') initChart();
+        }
+
+        function renderDay(idx) {
+            const day = itineraryData[idx];
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = `<h2 class="text-xl font-bold mb-6">${day.date} ${day.title}</h2>`;
+            day.events.forEach(ev => {
+                const mapUrl = `https://www.google.com/maps/search/${encodeURIComponent(ev.s + ' 東京')}`;
+                timeline.innerHTML += `
+                    <div class="relative mb-6">
+                        <div class="absolute -left-[35px] top-1 w-6 h-6 bg-white border-4 border-red-500 rounded-full z-10"></div>
+                        <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-bold text-red-500">${ev.t}</span>
+                                <a href="${mapUrl}" target="_blank" class="text-[10px] text-blue-500 underline">地圖</a>
+                            </div>
+                            <h4 class="font-bold text-gray-800 text-sm">${ev.s}</h4>
+                            <p class="text-xs text-gray-500 mt-1">${ev.d}</p>
+                        </div>
+                    </div>`;
+            });
+
+            const foodList = document.getElementById('foodList');
+            foodList.innerHTML = day.foods.map(f => {
+                const searchUrl = `https://www.google.com/maps/search/${encodeURIComponent(f)}`;
+                return `
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="text-sm text-gray-700 font-medium">${f}</span>
+                    <a href="${searchUrl}" target="_blank" class="text-xs bg-white text-red-500 px-3 py-1 rounded-full border border-red-100 font-bold shadow-sm">📍 導航</a>
+                </div>`;
+            }).join('');
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('budgetChart').getContext('2d');
+            if (window.myChart) window.myChart.destroy();
+            window.myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['機票', '住宿', '飲食', '交通票券'],
+                    datasets: [{ data: [13697, 6355, 5000, 3824], backgroundColor: ['#ef4444', '#3b82f6', '#f59e0b', '#10b981'] }]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } } }
+            });
+        }
+
+        window.onload = () => {
+            const select = document.getElementById('dayPicker');
+            itineraryData.forEach((d, i) => {
+                const opt = document.createElement('option');
+                opt.value = i; opt.innerText = `Day ${d.day}: ${d.title}`;
+                select.appendChild(opt);
+            });
+            showSection('summary');
+            renderDay(0);
+        };
+    </script>
+</body>
+</html>
