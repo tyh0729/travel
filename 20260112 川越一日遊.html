@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小江戶川越美食小吃一日遊行程表</title>
+    <style>
+        :root { --primary: #8b4513; --secondary: #d2691e; --bg: #f9f7f2; --card: #ffffff; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 900px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點美食卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .food-item { background: #fffaf0; border: 1px solid #fbd38d; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .food-name { font-weight: bold; color: #c05621; display: flex; align-items: center; }
+        .food-name::before { content: '🍴'; margin-right: 5px; }
+        .food-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #edf2f7; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-must { background: #e53e3e; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+        .tag-snack { background: #38a169; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🏮 小江戶川越一日遊：美食小吃全攻略</h1>
+    <div class="subtitle">出發點：Uhome Suite Kizuna Ikebukuro | 交通：東武東上線</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">08:00</div><div class="t-dot"></div><div class="t-label">池袋站出發<br>提早避開人潮</div></div>
+            <div class="t-step"><div class="t-time">09:15</div><div class="t-dot"></div><div class="t-label">川越市站<br>熊野神社</div></div>
+            <div class="t-step"><div class="t-time">10:00</div><div class="t-dot"></div><div class="t-label">大正浪漫<br>先抽鰻魚飯</div></div>
+            <div class="t-step"><div class="t-time">11:30</div><div class="t-dot"></div><div class="t-label">老街散策<br>時之鐘小吃</div></div>
+            <div class="t-step"><div class="t-time">14:00</div><div class="t-dot"></div><div class="t-label">冰川神社<br>求好姻緣</div></div>
+            <div class="t-step"><div class="t-time">15:15</div><div class="t-dot"></div><div class="t-label">喜多院<br>地瓜名物</div></div>
+            <div class="t-step"><div class="t-time">16:15</div><div class="t-dot"></div><div class="t-label">川越八幡宮<br>足腰祈願</div></div>
+            <div class="t-step"><div class="t-time">17:00</div><div class="t-dot"></div><div class="t-label">川越站<br>返回池袋</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 川越市站 ➔ 熊野神社</div>
+            <div class="spot-time">09:15 - 10:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">洗錢辨財天 / 運氣試煉</div>
+            <div class="food-desc">必做：在「洗錢處」洗淨錢幣祈求財運。早晨人少，一定要挑戰入口處長達 10 公尺的足部按摩石路。</div>
+            <a href="https://maps.app.goo.gl/9R6JtQx6L6vGzP8v9" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #e67e22;">
+        <div class="spot-header">
+            <div class="spot-title">2. 大正浪漫夢通 / 午餐排隊</div>
+            <div class="spot-time">10:00 - 11:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">小川菊 (Ogakiku)<span class="tag-must">百年鰻魚飯</span></div>
+            <div class="food-desc">重點：10:30 前務必先到門口看能否抽整理券。這家創業於 1807 年的老店，鰻魚口感鬆軟極致，醬汁濃郁卻不膩。</div>
+            <a href="https://maps.app.goo.gl/vS3vU9R1vE9v9v9v9" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">3. 時之鐘 / 藏造老街 (美食戰區)</div>
+            <div class="spot-time">11:30 - 13:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">中市本店<span class="tag-snack">必吃烤飯糰</span></div>
+            <div class="food-desc">特色：ねこまんま烤飯糰。熱騰騰的飯糰刷上秘傳醬油，表面灑滿大量鰹魚片，香氣四溢。</div>
+            <a href="https://maps.app.goo.gl/vS3vU9R1vE9v9v9v9" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">小江戶 Osatsu An (おさつ庵)<span class="tag-snack">IG 爆紅地瓜片</span></div>
+            <div class="food-desc">名物：大尺寸炸地瓜片。超薄脆、視覺效果滿分，搭配紫薯奶油沾醬更美味。</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">川越布丁 (Kawagoe Pudding)</div>
+            <div class="food-desc">推薦：地瓜布丁。底層滿滿的地瓜泥與滑順布丁結合，是老街的人氣甜點。</div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">4. 冰川神社</div>
+            <div class="spot-time">14:00 - 15:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">釣鯛魚籤 / 緣結守</div>
+            <div class="food-desc">特色：用小釣竿釣取鯛魚造型籤詩（紅鯛平安、粉鯛招緣）。此外可領取每日限量的「緣結玉」。</div>
+            <a href="https://maps.app.goo.gl/9R6JtQx6L6vGzP8v9" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">5. 喜多院 / 菓匠右門</div>
+            <div class="spot-time">15:15 - 16:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">菓匠右門 (Kasho Umon)<span class="tag-must">地瓜之戀</span></div>
+            <div class="food-desc">必買：「地瓜之戀 (いも恋)」。外皮 Q 彈、內餡由厚切地瓜與紅豆泥交疊，是川越最經典的溫暖小吃。</div>
+            <a href="https://maps.app.goo.gl/9R6JtQx6L6vGzP8v9" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">喜多院 (五百羅漢)</div>
+            <div class="food-desc">歷史：參觀德川家光誕生之屋，以及表情各異、活靈活現的五百多尊羅漢像。</div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">6. 川越八幡宮 ➔ 川越站</div>
+            <div class="spot-time">16:15 - 17:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">足腰健康祈願</div>
+            <div class="food-desc">必做：神社內有守護腿部與腰部的神明，適合為接下來的旅程祈求行走平安，隨後步行 6 分鐘前往川越站。</div>
+            <a href="https://maps.app.goo.gl/9R6JtQx6L6vGzP8v9" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="price-info">
+        💰 <strong>交通小提醒與住宿細節：</strong><br>
+        • 起點位於 <strong>Uhome Suite Kizuna Ikebukuro</strong>，步行至池袋站約需 10 分鐘。<br>
+        • 建議在池袋站購買「川越特選優惠聯票」，包含東武鐵道來回與川越巴士無限搭乘。<br>
+        • <strong>08:00</strong> 準時出發可於店家剛開門時抵達，大幅縮短排隊時間。
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>橫濱港灣美食地圖行程表</title>
+    <style>
+        :root { --primary: #003366; --secondary: #c8102e; --bg: #f4f7f9; --card: #ffffff; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 1000px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點美食卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .food-item { background: #f0f4f8; border: 1px solid #d1d9e6; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .food-name { font-weight: bold; color: #003366; display: flex; align-items: center; }
+        .food-name::before { content: '🍴'; margin-right: 5px; }
+        .food-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #edf2f7; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-must { background: #e53e3e; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🚢 橫濱經典海港一日遊攻略</h1>
+    <div class="subtitle">出發地：Uhome Suite Kizuna Ikebukuro | 交通：副都心線・港未來線</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">08:00</div><div class="t-dot"></div><div class="t-label">池袋出發<br>直達橫濱</div></div>
+            <div class="t-step"><div class="t-time">09:15</div><div class="t-dot"></div><div class="t-label">山手西洋館<br>異國建築</div></div>
+            <div class="t-step"><div class="t-time">10:30</div><div class="t-dot"></div><div class="t-label">元町商店街<br>時尚品牌</div></div>
+            <div class="t-step"><div class="t-time">11:30</div><div class="t-dot"></div><div class="t-label">橫濱中華街<br>美食午餐</div></div>
+            <div class="t-step"><div class="t-time">13:30</div><div class="t-dot"></div><div class="t-label">山下公園<br>海邊步道</div></div>
+            <div class="t-step"><div class="t-time">14:30</div><div class="t-dot"></div><div class="t-label">紅磚倉庫<br>文創購物</div></div>
+            <div class="t-step"><div class="t-time">15:30</div><div class="t-dot"></div><div class="t-label">日清博物館<br>麵包超人</div></div>
+            <div class="t-step"><div class="t-time">17:00</div><div class="t-dot"></div><div class="t-label">大棧橋<br>夕陽夜景</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 元町・中華街站 / 山手西洋館</div>
+            <div class="spot-time">09:15 - 10:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">打木麵包 (Uchiki Pan)<span class="tag-must">百年麵包店</span></div>
+            <div class="food-desc">位於元町站附近，創業於1888年。必買：英式白吐司。早上剛出爐的香氣非常迷人。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Uchiki+Pan+Yokohama" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="price-info">
+            🚶 <strong>步行指南：</strong> 從山手義大利山庭園散步至元町商店街，感受橫濱開港時期的異國氛圍。
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">2. 橫濱中華街 (Yokohama Chinatown)</div>
+            <div class="spot-time">11:30 - 13:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">鵬天閣 (Houtenkao)<span class="tag-must">排隊美食</span></div>
+            <div class="food-desc">必吃：金黃酥脆的「生煎包」。內餡多汁，底部煎得極其焦香。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Yokohama+Chinatown" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">熊貓饅頭 (Panda Bun)</div>
+            <div class="food-desc">中華街的IG打卡名物，可愛造型內含甜豆沙或肉餡，邊走邊吃的好選擇。</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #c8102e;">
+        <div class="spot-header">
+            <div class="spot-title">3. 山下公園 ➔ 象鼻公園 ➔ 紅磚倉庫</div>
+            <div class="spot-time">13:30 - 15:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">紅磚倉庫美食廣場 (Red Brick Warehouse)</div>
+            <div class="food-desc">推薦：橫濱限定的「橫濱橫丁」餐飲。此外，這裡常有季節性美食節（如草莓節、啤酒節）。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Yokohama+Red+Brick+Warehouse" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="price-info">
+            🌊 <strong>沿海散策：</strong> 這是一段極美的步行路線，可以沿著海邊欣賞「冰川丸」郵輪與著名的象鼻冰淇淋。
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">4. 港未來 21 / 日清泡麵博物館</div>
+            <div class="spot-time">15:30 - 17:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">NOODLES BAZAAR</div>
+            <div class="food-desc">博物館內的美食區。可以嚐到來自世界各地的特色麵食，當然也要親手製作一杯屬於自己的 Cup Noodle。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Cup+Noodles+Museum+Yokohama" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">麵包超人兒童博物館 (小吃區)</div>
+            <div class="food-desc">就算不進場參觀，也可以在免費區購買超可愛的麵包超人角色麵包！</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="background-color: #fdfaf5;">
+        <div class="spot-header">
+            <div class="spot-title">5. 大棧橋 (Osanbashi Pier) 夕陽夜景</div>
+            <div class="spot-time">17:15 - 18:45</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">Blue Terminal<span class="tag-must">景觀餐廳</span></div>
+            <div class="food-desc">位於大棧橋內。提供精緻漢堡與義大利麵，擁有俯瞰紅磚倉庫與地標塔的 270 度海景。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Osanbashi+Pier" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="price-info">
+            🌇 <strong>夕陽重點：</strong> 這裡是拍攝橫濱「三塔（King, Queen, Jack）」與地標塔的最佳制高點。從紅磚倉庫走回這裡只需 10 分鐘。
+        </div>
+    </div>
+
+    <div class="price-info">
+        💰 <strong>橫濱交通提示：</strong><br>
+        • 從池袋搭乘 <strong>東急東橫線/副都心線</strong> 直通港未來線至「元町・中華街」最方便。<br>
+        • <strong>步行：</strong> 橫濱港灣區非常適合散步，若累了可搭乘「紅鞋巴士 (Akaikutsu)」單趟 220 丹。<br>
+        • <strong>時間小提醒：</strong> 大棧橋風較大，傍晚前往記得帶件薄外套。
+    </div>
+
+</body>
+</html>

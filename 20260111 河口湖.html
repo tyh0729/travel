@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>富士山・河口湖美食地圖行程表</title>
+    <style>
+        :root { --primary: #1a508b; --secondary: #e67e22; --bg: #f0f4f8; --card: #ffffff; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 900px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點美食卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .food-item { background: #fffaf0; border: 1px solid #fbd38d; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .food-name { font-weight: bold; color: #c05621; display: flex; align-items: center; }
+        .food-name::before { content: '🍴'; margin-right: 5px; }
+        .food-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #edf2f7; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-must { background: #e53e3e; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🗻 富士山・河口湖一日遊全攻略</h1>
+    <div class="subtitle">出發地：Uhome Suite Kizuna Ikebukuro | 交通：高速巴士 & 富士急行</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">07:00</div><div class="t-dot"></div><div class="t-label">池袋陽光城<br>搭巴士</div></div>
+            <div class="t-step"><div class="t-time">09:12</div><div class="t-dot"></div><div class="t-label">富士山站<br>Q-STA/金鳥居</div></div>
+            <div class="t-step"><div class="t-time">10:45</div><div class="t-dot"></div><div class="t-label">下吉田<br>新倉山公園</div></div>
+            <div class="t-step"><div class="t-time">12:30</div><div class="t-dot"></div><div class="t-label">本町通<br>日川時計店</div></div>
+            <div class="t-step"><div class="t-time">14:20</div><div class="t-dot"></div><div class="t-label">河口湖站<br>富士山Lawson</div></div>
+            <div class="t-step"><div class="t-time">15:00</div><div class="t-dot"></div><div class="t-label">天上山纜車<br>狸貓茶屋</div></div>
+            <div class="t-step"><div class="t-time">16:30</div><div class="t-dot"></div><div class="t-label">大石公園<br>最美下午茶</div></div>
+            <div class="t-step"><div class="t-time">18:00</div><div class="t-dot"></div><div class="t-label">回程<br>返回池袋</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 富士山站 / Q-STA / 金鳥居</div>
+            <div class="spot-time">09:12 - 10:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">つるや食堂 (Tsuruya)<span class="tag-must">經典烏龍麵</span></div>
+            <div class="food-desc">必點：吉田烏龍麵。這家是70年老店，麵條極具嚼勁，搭配馬肉與高麗菜湯頭非常道地。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tsuruya+Shokudo+Fujiyoshida" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">2. 新倉山淺間公園 / 下吉田站</div>
+            <div class="spot-time">10:30 - 12:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">下吉田俱樂部 (Shimoyoshida Club)</div>
+            <div class="food-desc">位於車站內。推薦：富士山咖啡、冰淇淋。爬完398階梯下來後的最佳休息站。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Shimoyoshida+Club" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #e67e22;">
+        <div class="spot-header">
+            <div class="spot-title">3. 本町通 (日川時計店)</div>
+            <div class="spot-time">12:30 - 13:45 (午餐時段)</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">FabCafe Fuji</div>
+            <div class="food-desc">文青必去！這是一家改裝自老屋的咖啡廳，有很棒的單品咖啡與輕食咖哩，就在本町通拍照點附近。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=FabCafe+Fuji" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">麵許皆傳 (Menkyokaiden)</div>
+            <div class="food-desc">當地排隊名店。推薦「欲張烏龍麵」，料多實在，炸物非常酥脆。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Menkyokaiden+Udon" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">4. 河口湖站 / 富士山 Lawson</div>
+            <div class="spot-time">14:15 - 15:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">ほうとう不動 (Houtou Fudo) 站前店<span class="tag-must">必吃地標</span></div>
+            <div class="food-desc">山梨縣代表美食。南瓜味噌熬煮的粗麵條，鐵鍋裝盛份量極大。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Houtou+Fudo+Kawaguchiko+Station" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">FUJISAN SHOKUPAN (富士山吐司)</div>
+            <div class="food-desc">伴手禮首選！切開是夢幻藍白富士山的生吐司，也有富士山形狀的布丁。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=FUJISAN+SHOKUPAN" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">5. 天上山公園 (纜車)</div>
+            <div class="spot-time">15:15 - 16:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">狸貓茶屋 (Tanuki Tea House)</div>
+            <div class="food-desc">位於纜車山頂。必買：富士山烤糰子（有烙印）與兔子冰淇淋。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tenjozan+Park+Tanuki+Chaya" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">Fujiyama Cookie</div>
+            <div class="food-desc">纜車站入口處。手工富士山餅乾，推薦紅茶與香草口味。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Fujiyama+Cookie" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">6. 大石公園 (Lake Bake)</div>
+            <div class="spot-time">16:45 - 17:45</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">Lake Bake Cafe<span class="tag-must">絕美景觀</span></div>
+            <div class="food-desc">麵包控天堂。一定要坐露台席！招牌是熟成水果麵包，配上湖對面的富士山。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Lake+Bake+Kawaguchiko" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">葡萄屋 kofu 敷島 (Hana Terrace 內)</div>
+            <div class="food-desc">季節性水果聖代。1月有機會吃到超豐富的草莓聖代，就在大石公園旁邊。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hana+Terrace+Kawaguchiko" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="price-info">
+        💰 <strong>交通費用預估：</strong><br>
+        • 下吉田 ↔ 河口湖：310 丹 (火車)<br>
+        • 天上山纜車：1000 丹 (往返)<br>
+        • 河口湖 ↔ 大石公園：570 丹 (巴士單程)<br>
+        💡 <em>建議攜帶足夠現金，部分老字號烏龍麵店不收 IC 卡。</em>
+    </div>
+
+</body>
+</html>

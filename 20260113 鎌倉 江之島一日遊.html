@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鎌倉・江之島海濱美食行程表</title>
+    <style>
+        :root { --primary: #005a9c; --secondary: #e67e22; --bg: #f0f7fa; --card: #ffffff; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 950px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點美食卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .food-item { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .food-name { font-weight: bold; color: #0369a1; display: flex; align-items: center; }
+        .food-name::before { content: '🍴'; margin-right: 5px; }
+        .food-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #edf2f7; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-must { background: #e53e3e; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+        .tag-snack { background: #38a169; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🌊 鎌倉・江之島一日遊全攻略</h1>
+    <div class="subtitle">出發地：Uhome Suite Kizuna Ikebukuro | 交通：JR 湘南新宿線 & 江之電</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">08:00</div><div class="t-dot"></div><div class="t-label">池袋站<br>JR 出發</div></div>
+            <div class="t-step"><div class="t-time">09:30</div><div class="t-dot"></div><div class="t-label">七里濱站<br>富士山絕景</div></div>
+            <div class="t-step"><div class="t-time">10:45</div><div class="t-dot"></div><div class="t-label">鎌倉站<br>小町通/八幡宮</div></div>
+            <div class="t-step"><div class="t-time">13:15</div><div class="t-dot"></div><div class="t-label">長谷站<br>大佛/長谷寺</div></div>
+            <div class="t-step"><div class="t-time">15:30</div><div class="t-dot"></div><div class="t-label">鎌倉高校前<br>灌籃高手平交道</div></div>
+            <div class="t-step"><div class="t-time">16:30</div><div class="t-dot"></div><div class="t-label">江之島站<br>江島神社</div></div>
+            <div class="t-step"><div class="t-time">17:45</div><div class="t-dot"></div><div class="t-label">江之島燈塔<br>手扶梯/夕陽</div></div>
+            <div class="t-step"><div class="t-time">19:30</div><div class="t-dot"></div><div class="t-label">回程<br>返回池袋</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 七里濱站 (Shichirigahama)</div>
+            <div class="spot-time">09:30 - 10:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">Bills 七里濱店<span class="tag-must">世界第一早餐</span></div>
+            <div class="food-desc">必點：香蕉蜂蜜奶油鬆餅。坐在窗邊位可直接眺望富士山與湘南海岸。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Bills+Shichirigahama" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="price-info">
+            📸 <strong>拍照點：</strong> 從車站往海邊走，是捕捉「江之電 + 富士山」的絕佳位置。
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">2. 鎌倉站 / 小町通 / 鶴岡八幡宮</div>
+            <div class="spot-time">10:45 - 13:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">豐島屋 (鳩餅店)<span class="tag-snack">鎌倉最強伴手禮</span></div>
+            <div class="food-desc">必買：鴿子造型餅乾。小町通上還有許多現炸可樂餅、抹茶冰淇淋。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tsurugaoka+Hachimangu" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">秋本 (Akimoto)<span class="tag-must">吻仔魚飯</span></div>
+            <div class="food-desc">鎌倉代表美食：生/熟吻仔魚丼飯。鮮甜的吻仔魚是來鎌倉絕對不能錯過的午餐。</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #e67e22;">
+        <div class="spot-header">
+            <div class="spot-title">3. 長谷站 (高德院 & 長谷寺)</div>
+            <div class="spot-time">13:15 - 15:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">高德院 鎌倉大佛 (門票: 300円)</div>
+            <div class="food-desc">日本國寶，室外巨大的青銅大佛。旁邊有販售大佛造型的雞蛋糕。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Kamakura+Daibutsu" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">長谷寺 牡蠣稻荷神社 (門票: 400円)</div>
+            <div class="food-desc">必吃小吃：長谷寺門口附近的「御手洗糰子」。這裡以觀音像和海景露台聞名。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hase-dera+Temple" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">4. 鎌倉高校前站</div>
+            <div class="spot-time">15:30 - 16:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">《灌籃高手》經典平交道</div>
+            <div class="food-desc">青春的代名詞。拍照請注意交通安全，不要站在馬路中間。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Kamakurakokomae+Station" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">5. 江之島站 / 江島神社</div>
+            <div class="spot-time">16:30 - 19:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">章魚仙貝 (Asahi Honten)<span class="tag-snack">排隊美食</span></div>
+            <div class="food-desc">江之島名產：現壓章魚仙貝。可以看到章魚被壓平的神奇過程，非常酥脆。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Enoshima+Shrine" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">江之島 Sea Candle & 手扶梯 (750円)</div>
+            <div class="food-desc">包含景觀電梯與三段手扶梯費用。黃昏時刻登塔，可飽覽湘南海岸最美夕陽。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Enoshima+Sea+Candle" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="price-info">
+        💰 <strong>費用預估與交通提示：</strong><br>
+        • <strong>門票：</strong> 大佛 300円 + 長谷寺 400円 + 江之島套票 750円 = 1450円。<br>
+        • <strong>交通：</strong> 建議在鎌倉站或藤澤站購買「江之電一日券（Noriorikun）」，當日無限次搭乘江之電。<br>
+        • <strong>步行提醒：</strong> 江之島站走到神社入口約 10-15 分鐘，島上階梯多，購買 750円 包含手扶梯的票券會輕鬆許多。
+    </div>
+
+</body>
+</html>

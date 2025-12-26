@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一天抵達：池袋交通與超市採買全攻略</title>
+    <style>
+        :root { --primary: #1a3a5f; --secondary: #e67e22; --bg: #f8f9fa; --card: #ffffff; --green: #2d6a4f; --blue: #005a9c; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 1100px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點美食卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .info-item { background: #f0f4f8; border: 1px solid #d1d9e6; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .info-name { font-weight: bold; color: #1a3a5f; display: flex; align-items: center; justify-content: space-between; }
+        .info-name .badge { font-size: 0.7em; background: #fff; padding: 2px 6px; border-radius: 4px; border: 1px solid #1a3a5f; }
+        .info-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #edf2f7; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-market { background: var(--green); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+        .tag-food { background: #e53e3e; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+        .tag-shop { background: var(--blue); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🛫 旅遊第一天：出發、交通與池袋超市購物全攻略</h1>
+    <div class="subtitle">鳳山 ➔ 高雄 (KHH) ➔ 成田 (NRT) ➔ 池袋 | 2026.01.12</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">10:00</div><div class="t-dot"></div><div class="t-label">鳳山住家出發<br>公園二街</div></div>
+            <div class="t-step"><div class="t-time">11:00</div><div class="t-dot"></div><div class="t-label">高雄國際機場<br>航站 I 報到</div></div>
+            <div class="t-step"><div class="t-time">13:05</div><div class="t-dot"></div><div class="t-label">起飛<br>KHH 出發</div></div>
+            <div class="t-step"><div class="t-time">17:25</div><div class="t-dot"></div><div class="t-label">抵達<br>成田航站 2</div></div>
+            <div class="t-step"><div class="t-time">18:30</div><div class="t-dot"></div><div class="t-label">Skyliner<br>機場快線</div></div>
+            <div class="t-step"><div class="t-time">19:40</div><div class="t-dot"></div><div class="t-label">池袋站抵達<br>Check-in</div></div>
+            <div class="t-step"><div class="t-time">20:30</div><div class="t-dot"></div><div class="t-label">超市巡禮<br>購物/深夜食堂</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">0. 旅程起點：從家出發</div>
+            <div class="spot-time">10:00 - 11:00</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">住家：鳳山區公園二街</div>
+            <div class="info-desc">預計 10:00 出發前往高雄小港機場。建議可搭乘計程車或捷運，車程約 20-30 分鐘。</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">高雄國際機場 (KHH) 報到</div>
+            <div class="info-desc">於 11:00 前抵達航站 I 辦理登機手續及行李託運。</div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 機場交通：成田機場 (NRT) ➔ 池袋站</div>
+            <div class="spot-time">18:30 - 19:40</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">京成 Skyliner (特急)</div>
+            <div class="info-desc">在航站 2 樓下的「京成電鐵」站搭乘，前往 **日暮里站**。全車指定席，約 36 分鐘。</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">日暮里站 ➔ 池袋站</div>
+            <div class="info-desc">日暮里站站內轉乘 **JR 山手線** (內環，往池袋/新宿方向)，約 13 分鐘抵達。</div>
+        </div>
+        <div class="price-info">
+            🚩 **出口建議：** 從池袋站地下通道 **C6 出口** 離開，有電扶梯且距離飯店（池袋 2 丁目）最近。
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: var(--green);">
+        <div class="spot-header">
+            <div class="spot-title">2. 超級市場全攻略 <span class="tag-market">超市補給</span></div>
+            <div class="spot-time">便利生活圈</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">My Basket (まいばすけっと) <span class="badge">步行 2 分</span></div>
+            <div class="info-desc">**最速補給：** 飯店轉角即有，價格比 7-11 便宜。適合買水、飲料、鮮乳。(營業至 24:00)</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">赤札堂 (Aburadō) 池袋店 <span class="badge">步行 4 分</span></div>
+            <div class="info-desc">**生鮮最強：** 水果、魚肉種類豐富。晚上 8 點後熟食有半價折扣。(營業至 22:00)</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">肉のハナマサ (Hanamasa) <span class="badge">步行 10 分</span></div>
+            <div class="info-desc">**24 小時營業：** 量販型超市，肉類與大包裝零食非常便宜。半夜想買食材必去。</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #e53e3e;">
+        <div class="spot-header">
+            <div class="spot-title">3. 深夜美食與小吃推薦 <span class="tag-food">深夜食堂</span></div>
+            <div class="spot-time">21:00 - 深夜</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">麵創房 無敵家 (Mutekiya)<span class="tag-must">拉麵首選</span></div>
+            <div class="info-desc">池袋地標拉麵，叉燒極厚。營業至凌晨 04:00，建議避開用餐尖峰時間排隊。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=無敵家" class="btn-map" target="_blank">📍 Google Map</a>
+        </div>
+        <div class="info-item">
+            <div class="info-name">磯丸水產 (Isomaru Suisan)<span class="badge">24 小時</span></div>
+            <div class="info-desc">海鮮居酒屋，必點「蟹味噌甲羅燒」。現烤海鮮配啤酒，氣氛熱鬧。</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">鳥貴族 (Torikizoku)<span class="badge">連鎖居酒屋</span></div>
+            <div class="info-desc">全品項均一價的小吃/居酒屋。適合第一晚想吃燒鳥(串燒)但不想花大錢的旅客。</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">一蘭拉麵 (Ichiran) 池袋店<span class="badge">24 小時</span></div>
+            <div class="info-desc">經典博多拉麵。位於池袋東口，單人隔間用餐，深夜完全不用擔心沒飯吃。</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: var(--blue);">
+        <div class="spot-header">
+            <div class="spot-title">4. 池袋購物點 & 百貨商圈 <span class="tag-shop">買到手軟</span></div>
+            <div class="spot-time">購物熱點</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">驚安殿堂 唐吉訶德 (西口站前)<span class="badge">24 小時</span></div>
+            <div class="info-desc">**購物神店：** 從零食、藥妝到電器都有。西口店距離您最近，深夜也能盡情採買。</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">Bic Camera / Yamada Denki</div>
+            <div class="info-desc">**電器首選：** 池袋是電器激戰區，東口/西口均有大型店面。可以買吹風機、相機、保溫瓶。(多營業至 21:00 或 22:00)</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">西武 (SEIBU) / 東武 (TOBU) 百貨</div>
+            <div class="info-desc">**百貨地下一樓 (Depachika)：** 這裡有極致精緻的便當、甜點與麵包。閉店前(約 19:30)常有大折扣。</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">Sunshine City (太陽城)<span class="tag-must">綜合商場</span></div>
+            <div class="info-desc">內有 Pokemon Center、百貨 alpa、水族館。第一晚若抵達較早可去逛逛，服飾品牌非常多。</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">Animate 池袋本店</div>
+            <div class="info-desc">**動漫天堂：** 身為動漫愛好者必訪，全世界最大的動漫商品店。</div>
+        </div>
+    </div>
+
+    <div class="price-info">
+        💡 **小貼士：**<br>
+        1. **深夜安全：** 池袋北口/西口部分區域有酒店，獨自走進小巷稍微注意即可，主幹道很安全。<br>
+        2. **百貨折扣：** 想吃高品質生魚片或精緻便當，請在 19:30 抵達百貨地下街。<br>
+        3. **退稅：** 唐吉訶德與 Bic Camera 均可退稅，請隨身攜帶護照。
+    </div>
+
+</body>
+</html>
