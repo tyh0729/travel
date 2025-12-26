@@ -1,40 +1,180 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>20260110 ~ 20260119 東京旅遊</title>
+    <title>東京近郊跨年旅行氣象看板</title>
     <style>
-        /* 在這裡編寫 CSS 樣式 */
-		body {
-            font-family: sans-serif;
-            padding: 20px;
-        }
-        a {
-            text-decoration: none;
-            color: #007bff;
-            font-size: 1.2rem;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
+        :root { --primary: #2c3e50; --accent: #3498db; --bg: #f8f9fa; --danger: #e74c3c; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+        .container { max-width: 900px; margin: auto; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: var(--primary); margin-bottom: 15px; }
+        
+        .controls { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        select { padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; background: #fff; cursor: pointer; width: 100%; }
+        
+        .table-wrapper { overflow-x: auto; border-radius: 8px; border: 1px solid #eee; }
+        table { width: 100%; border-collapse: collapse; min-width: 450px; }
+        th { background: var(--primary); color: white; padding: 12px; }
+        td { padding: 12px; border-bottom: 1px solid #eee; text-align: center; }
+        
+        .temp { font-weight: bold; font-size: 1.1em; }
+        .cold { color: #3498db; } 
+        .freeze { color: #9b59b6; background: #f4ecf7; font-weight: bold; }
+        .wind-warning { color: #e67e22; font-weight: bold; }
+
+        .loading { display: none; text-align: center; padding: 20px; color: var(--accent); font-weight: bold; }
+        .info-card { background: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin-top: 20px; font-size: 0.85em; }
+        
+        @media (min-width: 600px) { .controls { flex-direction: row; } }
     </style>
 </head>
 <body>
-
-    <script>
-        /* 在這裡編寫 JavaScript 代碼 */
-    </script>
-
+<div class="container">
+	<h1 class="container">20260110~20260119 東京旅遊</h1>
+</div>
+	<br><br>
+<div class="container">
+	<h2 class="container">行程</h2>
+	<br><br>
 	<a href="20260110 到住宿點池袋.html">20260110 到住宿點池袋</a>
-	<br><br><br>	
+	<br><br>
 	<a href="20260111 河口湖.html">20260111 河口湖 一日遊</a>
-	<br><br><br>
+	<br><br>
 	<a href="20260112 川越一日遊.html">20260112 川越一日遊</a>
-	<br><br><br>
+	<br><br>
 	<a href="20260113 鎌倉 江之島一日遊.html">20260113 鎌倉一日遊</a>
-	<br><br><br>
+	<br><br>
 	<a href="20260114 橫濱一日遊.html">20260114 橫濱一日遊</a>
-	
+</div>
+<br><br>
+
+<div class="container">
+    c🇯🇵 東京近郊旅行氣象 (今日 → 01/19)</h2>
+
+    <div class="controls">
+        <select id="locSelect" onchange="fetchData()">
+            <optgroup label="城市區">
+                <option value="35.6895,139.6917">📍 東京市區</option>
+                <option value="35.4437,139.6380">🚢 橫濱</option>
+            </optgroup>
+            <optgroup label="觀光景點">
+                <option value="35.3192,139.5467">🌊 鎌倉</option>
+                <option value="35.9251,139.4858">🏺 川越</option>
+                <option value="35.4981,138.7686" selected>🗻 河口湖</option>
+                <option value="35.2324,139.1033">♨️ 箱根</option>
+                <option value="36.7516,139.5985">⛩️ 日光</option>
+                <option value="36.3484,138.6366">🛍️ 輕井澤</option>
+            </optgroup>
+        </select>
+        
+        <select id="dateSelect" onchange="displayTable()"></select>
+    </div>
+
+    <div id="loading" class="loading">📡 正在接收即時氣象數據...</div>
+    
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>時間</th>
+                    <th>溫度</th>
+                    <th>預估天氣</th>
+                    <th>風速 (m/s)</th>
+                </tr>
+            </thead>
+            <tbody id="weatherBody"></tbody>
+        </table>
+    </div>
+
+    <div class="info-card">
+        <strong>⚠️ 數據說明：</strong><br>
+        目前為 2025/12/26，API 可提供至 2026/01/10 之前的精確預報。1/11 之後的數據為<strong>長期氣候預測值</strong>。當日期越接近您的出發日，數據會自動校正為短期高準確度預報，請持續關注。
+    </div>
+</div>
+
+<script>
+    let weatherData = null;
+    const END_DATE = "2026-01-10";
+
+    function init() {
+        const dateSelect = document.getElementById('dateSelect');
+        const today = new Date();
+        const end = new Date(END_DATE);
+        
+        // 生成從今天到 1/19 的日期選項
+        for (let d = new Date(today); d <= end; d.setDate(d.getDate() + 1)) {
+            const dateStr = d.toISOString().split('T')[0];
+            const opt = document.createElement('option');
+            opt.value = dateStr;
+            opt.textContent = `${d.getMonth()+1}/${d.getDate()} (${getDayName(d.getDay())})`;
+            dateSelect.appendChild(opt);
+        }
+        fetchData();
+    }
+
+    function getDayName(dayIndex) {
+        return ["日", "一", "二", "三", "四", "五", "六"][dayIndex];
+    }
+
+    async function fetchData() {
+        const [lat, lon] = document.getElementById('locSelect').value.split(',');
+        const loading = document.getElementById('loading');
+        loading.style.display = 'block';
+
+        const today = new Date().toISOString().split('T')[0];
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,windspeed_10m,weathercode&timezone=Asia%2FTokyo&start_date=${today}&end_date=${END_DATE}`;
+
+        try {
+            const resp = await fetch(url);
+            weatherData = await resp.json();
+            displayTable();
+        } catch (e) {
+            alert("API 連線超時或日期超出範圍，請重新整理。");
+        } finally {
+            loading.style.display = 'none';
+        }
+    }
+
+    function displayTable() {
+        if (!weatherData) return;
+        const targetDate = document.getElementById('dateSelect').value;
+        const tbody = document.getElementById('weatherBody');
+        tbody.innerHTML = '';
+
+        weatherData.hourly.time.forEach((timeStr, i) => {
+            if (timeStr.startsWith(targetDate)) {
+                const hour = new Date(timeStr).getHours();
+                if (hour % 3 === 0) { // 每3小時顯示
+                    const temp = weatherData.hourly.temperature_2m[i];
+                    const wind = (weatherData.hourly.windspeed_10m[i] / 3.6).toFixed(1);
+                    const code = weatherData.hourly.weathercode[i];
+
+                    const tr = document.createElement('tr');
+                    let tempClass = "temp " + (temp <= 0 ? "freeze" : (temp < 7 ? "cold" : ""));
+                    let windClass = wind > 5.0 ? "wind-warning" : "";
+
+                    tr.innerHTML = `
+                        <td>${hour < 10 ? '0'+hour : hour}:00</td>
+                        <td class="${tempClass}">${temp}°C</td>
+                        <td>${getWeatherIcon(code)}</td>
+                        <td class="${windClass}">${wind}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            }
+        });
+    }
+
+    function getWeatherIcon(code) {
+        if (code === 0) return "☀️ 晴";
+        if (code <= 3) return "☁️ 多雲";
+        if (code >= 71) return "❄️ 雪/霜";
+        if (code >= 51) return "🌧️ 雨";
+        return "⛅ 陰";
+    }
+
+    window.onload = init;
+</script>
 </body>
 </html>
