@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東京下町美食地圖行程表</title>
+    <style>
+        :root { --primary: #b91c1c; --secondary: #d97706; --bg: #fdfaf6; --card: #ffffff; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 1100px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點美食卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .food-item { background: #fff1f2; border: 1px solid #fecaca; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .food-name { font-weight: bold; color: #991b1b; display: flex; align-items: center; }
+        .food-name::before { content: '🍴'; margin-right: 5px; }
+        .food-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #fdfaf6; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-must { background: #ef4444; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+        .tag-free { background: #059669; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🏮 淺草下町・經典地標一日巡禮</h1>
+    <div class="subtitle">出發地：Uhome Suite Kizuna Ikebukuro | 交通：東京地下鐵日比谷線 / 淺草線</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">08:00</div><div class="t-dot"></div><div class="t-label">築地市場<br>海鮮早午餐</div></div>
+            <div class="t-step"><div class="t-time">10:30</div><div class="t-dot"></div><div class="t-label">淺草寺<br>雷門參拜</div></div>
+            <div class="t-step"><div class="t-time">12:30</div><div class="t-dot"></div><div class="t-label">文化觀光中心<br>高空俯瞰</div></div>
+            <div class="t-step"><div class="t-time">14:30</div><div class="t-dot"></div><div class="t-label">谷中銀座<br>老街散策</div></div>
+            <div class="t-step"><div class="t-time">16:30</div><div class="t-dot"></div><div class="t-label">晴空塔<br>31F 免費景觀</div></div>
+            <div class="t-step"><div class="t-time">18:30</div><div class="t-dot"></div><div class="t-label">東京鐵塔<br>絕美夜景</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 築地外市場 (Tsukiji Outer Market)</div>
+            <div class="spot-time">08:00 - 10:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">築地虎杖 / 壽司大</div>
+            <div class="food-desc">必吃：新鮮海鮮丼、玉子燒（丸武或山長）。早起出發可以避開最強的人潮，享用最道地的生魚片。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tsukiji+Outer+Market" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="price-info">
+            🍣 <strong>提示：</strong> 場內市場已搬遷，但「外市場」依然美食林立，且多數店家在 14:00 後就會關門。
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #dc2626;">
+        <div class="spot-header">
+            <div class="spot-title">2. 淺草寺 & 淺草文化觀光中心</div>
+            <div class="spot-time">10:30 - 13:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">仲見世通小吃<span class="tag-must">經典散策</span></div>
+            <div class="food-desc">必吃：人形燒、炸饅頭（九重）、淺草花月堂大波蘿麵包。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Senso-ji" class="btn-map" target="_blank">📍 淺草寺導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">文化觀光中心 8F 展望台<span class="tag-free">免費景點</span></div>
+            <div class="food-desc">由隈研吾設計的建築。8 樓景觀台可以免費俯瞰淺草寺全景與晴空塔。</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #d97706;">
+        <div class="spot-header">
+            <div class="spot-title">3. 谷中銀座 (Yanaka Ginza)</div>
+            <div class="spot-time">14:30 - 16:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">肉のサトー (Nikunosato)<span class="tag-must">谷中メンチ</span></div>
+            <div class="food-desc">必吃：名物「炸牛肉餅」。谷中銀座以貓咪和懷舊氣氛著稱，非常適合在午後漫步。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Yanaka+Ginza" class="btn-map" target="_blank">📍 谷中銀座導航</a>
+        </div>
+        <div class="price-info">
+            🐱 <strong>特色：</strong> 尋找老街牆上的貓咪木雕，這裡有著名的「夕陽階梯」，是拍照聖地。
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #3b82f6;">
+        <div class="spot-header">
+            <div class="spot-title">4. 東京晴空塔 (Tokyo Skytree)</div>
+            <div class="spot-time">16:30 - 18:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">Skytree East Tower 31F<span class="tag-free">免費高空景觀</span></div>
+            <div class="food-desc">如果不打算登頂，前往 30、31 樓的景觀餐廳層，可以免費透過大片落地窗近距離欣賞晴空塔。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tokyo+Skytree" class="btn-map" target="_blank">📍 晴空塔導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #ef4444;">
+        <div class="spot-header">
+            <div class="spot-title">5. 東京鐵塔 (Tokyo Tower)</div>
+            <div class="spot-time">18:30 - 20:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">芝公園 / 豆腐屋 Ukai 坡道</div>
+            <div class="food-desc">東京鐵塔在夜晚點燈後最美。建議在芝公園或附近的紅葉谷公園捕捉鐵塔壯麗的視角。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tokyo+Tower" class="btn-map" target="_blank">📍 東京鐵塔導航</a>
+        </div>
+        <div class="price-info">
+            🗼 <strong>絕景：</strong> 東京鐵塔是東京的永恆象徵，夜晚的燈光會依據季節與節日變換顏色。
+        </div>
+    </div>
+
+    <div class="price-info">
+        💰 <strong>交通與小提醒：</strong><br>
+        • <strong>行程順序：</strong> 先去早開早關的築地，下午逛老街，傍晚與入夜後再看雙塔。<br>
+        • <strong>免費景點：</strong> 淺草文化觀光中心 8F 與晴空塔 31F 都是可以省下門票錢卻擁有絕佳視野的隱藏點。<br>
+        • <strong>谷中銀座：</strong> 這裡距離上野很近，若時間充裕也可以步行至根津神社。
+    </div>
+
+</body>
+</html>

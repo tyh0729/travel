@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吉祥寺・三鷹美食地圖行程表</title>
+    <style>
+        :root { --primary: #52796f; --secondary: #bc6c25; --bg: #fefae0; --card: #ffffff; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 1100px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點美食卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .food-item { background: #fdfaf5; border: 1px solid #e9edc9; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .food-name { font-weight: bold; color: #283618; display: flex; align-items: center; }
+        .food-name::before { content: '🍴'; margin-right: 5px; }
+        .food-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #fefae0; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-must { background: #e63946; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+        .tag-cat { background: #f4a261; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🌿 吉祥寺・三鷹童話與森林散策</h1>
+    <div class="subtitle">出發地：Uhome Suite Kizuna Ikebukuro | 交通：JR 中央線/總武線</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">08:30</div><div class="t-dot"></div><div class="t-label">池袋出發<br>前往吉祥寺</div></div>
+            <div class="t-step"><div class="t-time">09:15</div><div class="t-dot"></div><div class="t-label">井之頭恩賜公園<br>森林漫步</div></div>
+            <div class="t-step"><div class="t-time">10:00</div><div class="t-dot"></div><div class="t-label">井之頭自然園<br>尋找松鼠</div></div>
+            <div class="t-step"><div class="t-time">12:00</div><div class="t-dot"></div><div class="t-label">三鷹之森吉卜力<br>動畫世界</div></div>
+            <div class="t-step"><div class="t-time">14:30</div><div class="t-dot"></div><div class="t-label">吉祥寺Petit村<br>貓咪森林</div></div>
+            <div class="t-step"><div class="t-time">15:45</div><div class="t-dot"></div><div class="t-label">武藏野八幡宮<br>在地祈福</div></div>
+            <div class="t-step"><div class="t-time">16:30</div><div class="t-dot"></div><div class="t-label">商店街巡禮<br>購物/北歐通</div></div>
+            <div class="t-step"><div class="t-time">18:30</div><div class="t-dot"></div><div class="t-label">口琴橫丁<br>深夜食堂</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 井之頭恩賜公園 & 自然園</div>
+            <div class="spot-time">09:15 - 11:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">いせや (Iseya) 總本店<span class="tag-must">傳奇串燒</span></div>
+            <div class="food-desc">公園入口處。必吃：各類平價燒鳥(串燒)。早晨散步後，來一串鹽味雞肉串配上湖景是吉祥寺的標配。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Inokashira+Park" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="price-info">
+            🐾 <strong>井之頭自然園：</strong> 分為本園(動物)與分園(水族)。最著名的「松鼠小徑」可以近距離觀察松鼠，非常療癒。
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #bc6c25;">
+        <div class="spot-header">
+            <div class="spot-title">2. 三鷹之森吉卜力美術館</div>
+            <div class="spot-time">12:00 - 14:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">草帽咖啡廳 (Straw Hat Cafe)</div>
+            <div class="food-desc">位於美術館內。推薦：吉卜力主題蛋包飯與熱牛奶。杯墊與裝飾皆極具宮崎駿風格。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Ghibli+Museum" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="price-info">
+            🎟️ <strong>提醒：</strong> 門票需提前一個月於網路預約，建議購買 12:00 入場場次。
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">3. 吉祥寺Petit村 (Kichijoji Petit Mura)</div>
+            <div class="spot-time">14:30 - 15:45</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">Cat Cafe Temari no Oshiro<span class="tag-cat">貓咪森林咖啡</span></div>
+            <div class="food-desc">宛如踏入宮崎駿電影中的童話小村。即便不進貓咪咖啡廳，外圍的建築與飾品店也非常好拍。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Kichijoji+Petit+Mura" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="price-info">
+            ⏰ <strong>營業時間：</strong> 假日 10:00 / 平日 11:00 開放。這是一個隱藏在巷弄中的森林童話世界。
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #dda15e;">
+        <div class="spot-header">
+            <div class="spot-title">4. 吉祥寺商店街：SUNROAD & DAIYA 街</div>
+            <div class="spot-time">16:00 - 18:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">SATOU (吉祥寺さとう)<span class="tag-must">炸牛肉丸</span></div>
+            <div class="food-desc">DAIYA街必排美食。使用頂級和牛製作的炸牛肉餅，外皮酥脆內裡爆汁。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=吉祥寺さとう" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">小澤製粉 (Kozawa Seifun)</div>
+            <div class="food-desc">北歐通散策。這裡聚集了許多質感文具店與歐風咖啡廳，非常適合女子旅。</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #1a3a5f;">
+        <div class="spot-header">
+            <div class="spot-title">5. 口琴橫丁 (Harmonica Yokocho)</div>
+            <div class="spot-time">18:30 - 深夜</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">みんみん (MinMin) 餃子</div>
+            <div class="food-desc">口琴橫丁內的老店。必吃：厚皮煎餃。隨後可在這迷宮般的巷弄中尋找特色的立飲小酒吧。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Harmonica+Yokocho" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="price-info">
+        💰 <strong>交通與小提醒：</strong><br>
+        • <strong>步行：</strong> 三鷹美術館到吉祥寺站之間可以穿過井之頭公園步行，約需 15-20 分鐘，風景極佳。<br>
+        • <strong>武藏野八幡宮：</strong> 位於商店街盡頭，是當地歷史悠久的守護神，適合安靜參拜。<br>
+        • <strong>北歐通：</strong> 喜歡生活雜貨的朋友，請預留 30 分鐘在北歐通與中道通尋寶。
+    </div>
+
+</body>
+</html>

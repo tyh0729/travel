@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅遊最後一天：東京 ➔ 高雄返家全攻略</title>
+    <style>
+        :root { --primary: #1e3a8a; --secondary: #f59e0b; --bg: #f8fafc; --card: #ffffff; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 1100px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點交通卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .info-item { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .info-name { font-weight: bold; color: #1e3a8a; display: flex; align-items: center; }
+        .info-name::before { content: '✈️'; margin-right: 5px; }
+        .info-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #f8fafc; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-flight { background: #2563eb; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+        .tag-taxi { background: #059669; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🛫 旅遊最後一天：東京 ➔ 高雄 返家全攻略</h1>
+    <div class="subtitle">池袋 ➔ 成田 (NRT) ➔ 高雄 (KHH) ➔ 鳳山公園二街</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">09:15</div><div class="t-dot"></div><div class="t-label">池袋飯店<br>退房/出發</div></div>
+            <div class="t-step"><div class="t-time">10:00</div><div class="t-dot"></div><div class="t-label">日暮里站<br>搭 Skyliner</div></div>
+            <div class="t-step"><div class="t-time">10:45</div><div class="t-dot"></div><div class="t-label">成田機場 T2<br>報到/掛行李</div></div>
+            <div class="t-step"><div class="t-time">13:20</div><div class="t-dot"></div><div class="t-label">起飛<br>NRT ➔ KHH</div></div>
+            <div class="t-step"><div class="t-time">16:50</div><div class="t-dot"></div><div class="t-label">抵達<br>高雄小港機場</div></div>
+            <div class="t-step"><div class="t-time">18:00</div><div class="t-dot"></div><div class="t-label">搭車返家<br>往鳳山</div></div>
+            <div class="t-step"><div class="t-time">18:30</div><div class="t-dot"></div><div class="t-label">順利返抵<br>鳳山住家</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 東京交通：池袋 ➔ 成田機場第 2 航廈</div>
+            <div class="spot-time">09:15 - 10:45</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">第一段：JR 山手線</div>
+            <div class="info-desc">從池袋站搭乘 JR 山手線（內環）至 **日暮里站**（約 13 分鐘）。</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">第二段：京成 Skyliner</div>
+            <div class="info-desc">於日暮里站轉乘京成 Skyliner 前往 **機場第 2 航廈**（約 36 分鐘）。</div>
+        </div>
+        <div class="price-info">
+            🎫 <strong>注意：</strong> 建議提早 10-15 分鐘到日暮里站，預留轉乘與找月台的時間。
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #2563eb;">
+        <div class="spot-header">
+            <div class="spot-title">2. 國際航班：成田 ➔ 高雄 <span class="tag-flight">航班資訊</span></div>
+            <div class="spot-time">13:20 - 16:50</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">成田國際機場 (NRT) 航站 2</div>
+            <div class="info-desc">請於 11:20 前完成報到手續。登機門前可做最後的免稅店採買。</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">高雄國際機場 (KHH) 航站 I</div>
+            <div class="info-desc">預計 16:50 降落。下機後請辦理入境、提取行李並完成海關申報。</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #059669;">
+        <div class="spot-header">
+            <div class="spot-title">3. 返家交通：小港機場 ➔ 鳳山區公園二街 <span class="tag-taxi">計程車資訊</span></div>
+            <div class="spot-time">17:50 - 18:30</div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">推薦計程車預約電話</div>
+            <div class="info-desc">
+                • **台灣大車隊：** 手機撥打 **55688**<br>
+                • **大愛計程車：** 07-3135511<br>
+                • **凱旋計程車：** 07-7241111
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="info-name">預估車資與路程</div>
+            <div class="info-desc">
+                • **距離：** 約 5.5 - 6 公里 (經五甲路或中山路)。<br>
+                • **預估車資：** 約 **NT$200 - NT$280** (視交通狀況與有無夜間加成而定)。<br>
+                • **支付方式：** 多數車隊支援 LINE Pay、信用卡或現金。
+            </div>
+            <a href="https://www.google.com/maps/dir/Kaohsiung+International+Airport,+Kaohsiung+City/鳳山區公園二街" class="btn-map" target="_blank">📍 開啟 Google Map 路線預覽</a>
+        </div>
+    </div>
+
+    <div class="price-info">
+        💰 <strong>返家小叮嚀：</strong><br>
+        • <strong>Visit Japan Web：</strong> 若有免稅品，回台後請留意台灣海關規定。<br>
+        • <strong>計程車搭乘：</strong> 機場一樓出站後有排班計程車區，或可使用 **Uber / Line Taxi** APP 預約，乘車位置通常在指定出口。<br>
+        • <strong>家人的擁抱：</strong> 辛苦了！祝您這次東京之旅圓滿落幕，平安回到溫暖的家。
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東京市區美食地圖行程表</title>
+    <style>
+        :root { --primary: #2563eb; --secondary: #f59e0b; --bg: #f8fafc; --card: #ffffff; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 1100px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點美食卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .food-item { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .food-name { font-weight: bold; color: #1e3a8a; display: flex; align-items: center; }
+        .food-name::before { content: '🍴'; margin-right: 5px; }
+        .food-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #f8fafc; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-must { background: #ef4444; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+        .tag-view { background: #8b5cf6; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🏙️ 東京市區・澀谷原宿流行散策</h1>
+    <div class="subtitle">出發地：Uhome Suite Kizuna Ikebukuro | 交通：JR 山手線 / 都營大江戶線</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">09:00</div><div class="t-dot"></div><div class="t-label">東京巨蛋<br>城市散策</div></div>
+            <div class="t-step"><div class="t-time">11:00</div><div class="t-dot"></div><div class="t-label">明治神宮<br>森林參拜</div></div>
+            <div class="t-step"><div class="t-time">12:30</div><div class="t-dot"></div><div class="t-label">竹下通<br>原宿小吃</div></div>
+            <div class="t-step"><div class="t-time">14:30</div><div class="t-dot"></div><div class="t-label">澀谷十字路口<br>中心街</div></div>
+            <div class="t-step"><div class="t-time">16:30</div><div class="t-dot"></div><div class="t-label">宮下公園<br>西班牙坂</div></div>
+            <div class="t-step"><div class="t-time">18:30</div><div class="t-dot"></div><div class="t-label">澀谷HIKARIE<br>11F夜景</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 東京巨蛋 (Tokyo Dome City)</div>
+            <div class="spot-time">09:00 - 10:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">LaQua 購物中心</div>
+            <div class="food-desc">早晨可以在東京巨蛋周邊散步。推薦：Shake Shack 漢堡（雖然是連鎖但環境極佳），或是在 LaQua 享受早晨咖啡。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tokyo+Dome" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="price-info">
+            🏟️ <strong>亮點：</strong> 欣賞日本職棒殿堂的外觀，若有體力可體驗 LaQua 的都市溫泉。
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #10b981;">
+        <div class="spot-header">
+            <div class="spot-title">2. 明治神宮 & 竹下通</div>
+            <div class="spot-time">11:00 - 14:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">MARION CREPES<span class="tag-must">原宿必吃</span></div>
+            <div class="food-desc">竹下通地標性甜點。必吃：鮮奶油水果可麗餅。邊逛可愛雜貨邊享受原宿的繽紛氣息。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Meiji+Jingu" class="btn-map" target="_blank">📍 明治神宮導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">Calbee+ 現炸薯條</div>
+            <div class="food-desc">竹下通店限定的現炸薯條配上楓糖或巧克力，是超人氣的熱食小吃。</div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">3. 澀谷十字路口 & 澀谷中心街</div>
+            <div class="spot-time">14:30 - 16:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">一蘭拉麵 澀谷店</div>
+            <div class="food-desc">若午餐還沒吃飽，澀谷中心街內的一蘭是許多人的首選。此外，中心街有非常多連鎖咖啡店適合休息。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Shibuya+Scramble+Crossing" class="btn-map" target="_blank">📍 十字路口導航</a>
+        </div>
+        <div class="price-info">
+            🚦 <strong>體驗：</strong> 到星巴克二樓俯瞰全世界最繁忙的十字路口，感受東京的脈動。
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #f43f5e;">
+        <div class="spot-header">
+            <div class="spot-title">4. 宮下公園 & 西班牙坂</div>
+            <div class="spot-time">16:30 - 18:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">宮下橫丁 (MIYASHITA PARK)</div>
+            <div class="food-desc">位於宮下公園北側一樓。這裡集結了全日本各地的特色居酒屋小吃，氣氛極佳。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=MIYASHITA+PARK" class="btn-map" target="_blank">📍 宮下公園導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">西班牙坂 (Spain-zaka)</div>
+            <div class="food-desc">充滿異國情調的小斜坡，隱藏許多精緻的歐風咖啡館與餐廳。</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #8b5cf6;">
+        <div class="spot-header">
+            <div class="spot-title">5. 澀谷 HIKARIE (11F Sky Lobby)</div>
+            <div class="spot-time">18:30 - 20:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">Sky Lobby 免費夜景<span class="tag-view">隱藏景點</span></div>
+            <div class="food-desc">位於 11 樓的空中大廳，可以免費透過落地窗俯瞰澀谷站周邊與十字路口的高空美景。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Shibuya+Hikarie" class="btn-map" target="_blank">📍 HIKARIE 導航</a>
+        </div>
+    </div>
+
+    <div class="price-info">
+        💰 <strong>交通與小提醒：</strong><br>
+        • <strong>行程順序：</strong> 建議從池袋搭乘 **東京地下鐵副都心線** 直達澀谷，再往回逛至原宿。或搭 **JR 山手線** 串聯所有地點。<br>
+        • <strong>澀谷 HIKARIE：</strong> 11 樓不僅有夜景，還有許多高品質的餐廳，是晚餐的好選擇。<br>
+        • <strong>宮下公園：</strong> 頂樓有星巴克與滑板場，是近年東京年輕人最愛的聚集地。
+    </div>
+
+</body>
+</html>

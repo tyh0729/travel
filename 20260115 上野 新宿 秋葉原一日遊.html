@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上野・新宿・秋葉原美食地圖行程表</title>
+    <style>
+        :root { --primary: #2d6a4f; --secondary: #e67e22; --bg: #f4f7f6; --card: #ffffff; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 15px; background-color: var(--bg); }
+        h1 { color: var(--primary); text-align: center; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
+        
+        /* X軸橫向時間軸 */
+        .timeline-wrapper { overflow-x: auto; background: var(--card); padding: 30px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .timeline-x { display: flex; min-width: 1050px; position: relative; }
+        .timeline-x::after { content: ''; position: absolute; top: 38px; left: 0; right: 0; height: 3px; background: #cbd5e0; z-index: 1; }
+        .t-step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 5px; }
+        .t-time { font-weight: bold; color: var(--secondary); font-size: 0.85em; }
+        .t-dot { width: 14px; height: 14px; background: var(--primary); border: 3px solid #fff; border-radius: 50%; margin: 8px auto; box-shadow: 0 0 0 2px var(--primary); }
+        .t-label { font-size: 0.8em; white-space: normal; color: #2d3748; font-weight: bold; line-height: 1.2; }
+
+        /* 景點美食卡片 */
+        .spot-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .spot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .spot-title { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+        .spot-time { font-size: 0.9em; color: var(--secondary); font-weight: bold; }
+        
+        .food-item { background: #f1f8f5; border: 1px solid #cce3d8; border-radius: 10px; padding: 12px; margin-top: 10px; }
+        .food-name { font-weight: bold; color: #1b4332; display: flex; align-items: center; }
+        .food-name::before { content: '🍴'; margin-right: 5px; }
+        .food-desc { font-size: 0.9em; color: #555; margin: 5px 0; }
+        
+        .btn-map { display: inline-block; background: #4285F4; color: white; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 0.8em; margin-top: 5px; transition: 0.2s; }
+        .btn-map:hover { background: #3367d6; }
+        
+        .price-info { background: #edf2f7; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-top: 15px; color: #4a5568; }
+        .tag-must { background: #e53e3e; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+        .tag-shop { background: #6b46c1; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🐼 東京藝文與都市魅力一日遊</h1>
+    <div class="subtitle">出發地：Uhome Suite Kizuna Ikebukuro | 交通：JR 山手線 & 步行</div>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-x">
+            <div class="t-step"><div class="t-time">08:30</div><div class="t-dot"></div><div class="t-label">池袋出發<br>前往上野</div></div>
+            <div class="t-step"><div class="t-time">09:30</div><div class="t-dot"></div><div class="t-label">上野動物園<br>熊野森林</div></div>
+            <div class="t-step"><div class="t-time">11:30</div><div class="t-dot"></div><div class="t-label">上野東照宮<br>阿美橫丁</div></div>
+            <div class="t-step"><div class="t-time">13:30</div><div class="t-dot"></div><div class="t-label">多慶屋<br>紫色購物</div></div>
+            <div class="t-step"><div class="t-time">14:30</div><div class="t-dot"></div><div class="t-label">秋葉原站<br>動漫/電器</div></div>
+            <div class="t-step"><div class="t-time">16:30</div><div class="t-dot"></div><div class="t-label">新宿東口<br>3D 三色貓</div></div>
+            <div class="t-step"><div class="t-time">17:30</div><div class="t-dot"></div><div class="t-label">歌舞伎町<br>東京都廳</div></div>
+            <div class="t-step"><div class="t-time">19:30</div><div class="t-dot"></div><div class="t-label">回程<br>返回池袋</div></div>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">1. 上野動物園 & 上野東照宮</div>
+            <div class="spot-time">09:30 - 12:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">上野公園美食屋</div>
+            <div class="food-desc">園內推薦：熊貓便當與各種熊貓造型甜點。隨後參觀金碧輝煌的「東照宮」。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Ueno+Zoo" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #e67e22;">
+        <div class="spot-header">
+            <div class="spot-title">2. 阿美橫丁 (Ameyoko) / 午餐</div>
+            <div class="spot-time">12:15 - 13:45</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">肉の大山 (Nikunooyama)<span class="tag-must">超人氣小吃</span></div>
+            <div class="food-desc">必吃：炸牛肉餅（Menchi Katsu）。外皮酥脆多汁，是阿美橫丁最有名的排隊美食。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Ameyoko+Market" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">みなとや (Minatoya) 海鮮丼</div>
+            <div class="food-desc">平價新鮮的生魚片蓋飯，CP 值極高，是老街必吃的指標店。</div>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #6b46c1;">
+        <div class="spot-header">
+            <div class="spot-title">3. 多慶屋 (Takeya) / 秋葉原</div>
+            <div class="spot-time">14:00 - 16:15</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">多慶屋 紫色大樓<span class="tag-shop">購物聖地</span></div>
+            <div class="food-desc">橫跨多棟的紫色購物中心，從零食、藥妝到專櫃保養品應有盡有，價格實惠。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Takeya+Ueno" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+        <div class="food-item">
+            <div class="food-name">秋葉原動漫巡禮</div>
+            <div class="food-desc">必訪：Animate、Radio Kaikan。美食推薦：Roast Beef Ohno (和牛烤牛肉蓋飯)。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Akihabara+Station" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card">
+        <div class="spot-header">
+            <div class="spot-title">4. 新宿東口 3D 貓 / 歌舞伎町</div>
+            <div class="spot-time">16:45 - 18:00</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">新宿東口 Cross Vision</div>
+            <div class="food-desc">必看：巨大的「3D 三色貓」動態牆。隨後步行至歌舞伎町看哥吉拉地標。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Shinjuku+3D+Cat" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="spot-card" style="border-left-color: #1a3a5f;">
+        <div class="spot-header">
+            <div class="spot-title">5. 東京都廳 (南展望室) 夕陽夜景</div>
+            <div class="spot-time">18:15 - 19:30</div>
+        </div>
+        <div class="food-item">
+            <div class="food-name">免費 45 樓展望室</div>
+            <div class="food-desc">免費欣賞東京全景。天氣好時可以看到東京鐵塔甚至富士山輪廓。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tokyo+Metropolitan+Government+Building" class="btn-map" target="_blank">📍 Google Map 導航</a>
+        </div>
+    </div>
+
+    <div class="price-info">
+        💰 <strong>交通與小提醒：</strong><br>
+        • <strong>上野動物園：</strong> 09:30 準時開園，建議提早 10 分鐘抵達大門口以避開首波人潮。<br>
+        • <strong>交通：</strong> 從秋葉原搭乘 JR 中央・總武線直達新宿站，非常快速。<br>
+        • <strong>展望室：</strong> 東京都廳南展望室免費入場，最後入場時間通常為 21:30。
+    </div>
+
+</body>
+</html>
