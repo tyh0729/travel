@@ -3,117 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>東京近郊跨年旅行氣象看板</title>
+    <title>2026 東京之行 | 旅行手冊</title>
     <style>
-        :root { --primary: #2c3e50; --accent: #3498db; --bg: #f8f9fa; --danger: #e74c3c; }
-        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); margin: 0; padding: 10px; }
-        .container { max-width: 900px; margin: auto; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: var(--primary); margin-bottom: 15px; }
-        
-        .controls { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-        select { padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; background: #fff; cursor: pointer; width: 100%; }
-        
-        .table-wrapper { overflow-x: auto; border-radius: 8px; border: 1px solid #eee; }
-        table { width: 100%; border-collapse: collapse; min-width: 450px; }
-        th { background: var(--primary); color: white; padding: 12px; }
-        td { padding: 12px; border-bottom: 1px solid #eee; text-align: center; }
-        
-        .temp { font-weight: bold; font-size: 1.1em; }
-        .cold { color: #3498db; } 
-        .freeze { color: #9b59b6; background: #f4ecf7; font-weight: bold; }
-        .wind-warning { color: #e67e22; font-weight: bold; }
+        :root {
+            --primary: #1a365d;
+            --accent: #3182ce;
+            --bg: #f7fafc;
+            --text: #2d3748;
+            --white: #ffffff;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
 
-        .loading { display: none; text-align: center; padding: 20px; color: var(--accent); font-weight: bold; }
-        .info-card { background: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin-top: 20px; font-size: 0.85em; }
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        section h2 {
+            display: flex;
+            align-items: center;
+            font-size: 1.8em;
+            color: var(--primary);
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 10px;
+            width: fit-content;
+        }
+
+        section h2::before {
+            content: '🗓️';
+            margin-right: 15px;
+        }
+
+        /* Itinerary Grid */
+        .itinerary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .day-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #edf2f7;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--accent);
+        }
+
+        .day-card .date {
+            font-size: 0.9em;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .day-card .title {
+            font-size: 1.15em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .day-card .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        /* Weather Section */
+        .weather-panel {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        select {
+            appearance: none;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1em;
+            color: var(--primary);
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        select:focus {
+            border-color: var(--accent);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #edf2f7;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background: #f1f5f9;
+            color: var(--primary);
+            padding: 15px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .temp { font-weight: bold; font-size: 1.1em; }
+        .cold { color: #3182ce; } 
+        .freeze { color: #805ad5; background: #faf5ff; }
+        .wind-warning { color: #dd6b20; font-weight: bold; }
+
+        .loading { display: none; text-align: center; padding: 30px; color: var(--accent); font-weight: bold; font-size: 1.2em; }
         
-        @media (min-width: 600px) { .controls { flex-direction: row; } }
+        .disclaimer {
+            background: #fffaf0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 25px;
+            font-size: 0.85em;
+            color: #744210;
+            border: 1px solid #fbd38d;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #a0aec0;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            header { padding: 50px 20px; }
+            header h1 { font-size: 1.8em; }
+            .controls { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-<div class="container">
-	<h1 class="container">20260110~20260119 東京旅遊</h1>
-</div>
-	<br><br>
-<div class="container">
-	<h2 class="container">行程</h2>
-	<br><br>
-	<a href="20260110 到住宿點池袋.html">20260110 到住宿點池袋</a>
-	<br><br>
-	<a href="20260111 河口湖.html">20260111 河口湖 一日遊</a>
-	<br><br>
-	<a href="20260112 川越一日遊.html">20260112 川越一日遊</a>
-	<br><br>
-	<a href="20260113 鎌倉 江之島一日遊.html">20260113 鎌倉一日遊</a>
-	<br><br>	
-	<a href="20260114 橫濱一日遊.html">20260114 橫濱一日遊</a>
-	<br><br>
-	<a href="20260115 上野 新宿 秋葉原一日遊.html">20260115 上野 新宿 秋葉原一日遊</a>
-	<br><br>	
-	<a href="20260116 吉祥寺・三鷹深度一日遊.html">20260116 吉祥寺・三鷹深度一日遊</a>
-	<br><br>
-	<a href="20260117 東京市區・澀谷.html">20260117 東京市區・澀谷一日遊</a>
-	<br><br>
-	<a href="20260118 淺草・下町風情與雙塔絕景.html">20260118 淺草・下町風情與雙塔絕景一日遊</a>
-	<br><br>
-	<a href="20260119 旅遊最後一天：東京 to 高雄.html">20260119 旅遊最後一天：東京 to 高雄</a>
-</div>
-<br><br>
 
-<div class="container">
-    c🇯🇵 東京近郊旅行氣象 (今日 → 01/19)</h2>
+<header>
+    <h1>2026 東京之行</h1>
+    <p>2026.01.10 — 2026.01.19 | 日本東京--旅行手冊</p>
+</header>
 
-    <div class="controls">
-        <select id="locSelect" onchange="fetchData()">
-            <optgroup label="城市區">
-                <option value="35.6895,139.6917">📍 東京市區</option>
-                <option value="35.4437,139.6380">🚢 橫濱</option>
-            </optgroup>
-            <optgroup label="觀光景點">
-                <option value="35.3192,139.5467">🌊 鎌倉</option>
-                <option value="35.9251,139.4858">🏺 川越</option>
-                <option value="35.4981,138.7686" selected>🗻 河口湖</option>
-                <option value="35.2324,139.1033">♨️ 箱根</option>
-                <option value="36.7516,139.5985">⛩️ 日光</option>
-                <option value="36.3484,138.6366">🛍️ 輕井澤</option>
-            </optgroup>
-        </select>
-        
-        <select id="dateSelect" onchange="displayTable()"></select>
-    </div>
-
-    <div id="loading" class="loading">📡 正在接收即時氣象數據...</div>
+<div class="main-container">
     
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>時間</th>
-                    <th>溫度</th>
-                    <th>預估天氣</th>
-                    <th>風速 (m/s)</th>
-                </tr>
-            </thead>
-            <tbody id="weatherBody"></tbody>
-        </table>
-    </div>
+    <section>
+        <h2>每日行程規劃</h2>
+        <div class="itinerary-grid">
+            <a href="20260110 到住宿點池袋.html" class="day-card">
+                <span class="date">Day 01 | 01.10</span>
+                <span class="icon">✈️</span>
+                <span class="title">抵達東京・入住房東池袋</span>
+            </a>
+            <a href="20260111 河口湖.html" class="day-card">
+                <span class="date">Day 02 | 01.11</span>
+                <span class="icon">🗻</span>
+                <span class="title">富士山・河口湖一日遊</span>
+            </a>
+            <a href="20260112 川越一日遊.html" class="day-card">
+                <span class="date">Day 03 | 01.12</span>
+                <span class="icon">🏺</span>
+                <span class="title">小江戶川越・歷史散策</span>
+            </a>
+            <a href="20260113 鎌倉 江之島一日遊.html" class="day-card">
+                <span class="date">Day 04 | 01.13</span>
+                <span class="icon">🌊</span>
+                <span class="title">鎌倉・江之島海濱之旅</span>
+            </a>
+            <a href="20260114 橫濱一日遊.html" class="day-card">
+                <span class="date">Day 05 | 01.14</span>
+                <span class="icon">🚢</span>
+                <span class="title">港都橫濱・未來港散步</span>
+            </a>
+            <a href="20260115 上野 新宿 秋葉原一日遊.html" class="day-card">
+                <span class="date">Day 06 | 01.15</span>
+                <span class="icon">🗼</span>
+                <span class="title">上野、新宿與秋葉原巡禮</span>
+            </a>
+            <a href="20260116 吉祥寺・三鷹深度一日遊.html" class="day-card">
+                <span class="date">Day 07 | 01.16</span>
+                <span class="icon">🌳</span>
+                <span class="title">吉祥寺・三鷹吉卜力深度遊</span>
+            </a>
+            <a href="20260117 東京市區・澀谷.html" class="day-card">
+                <span class="date">Day 08 | 01.17</span>
+                <span class="icon">🚦</span>
+                <span class="title">澀谷流行文化・市區探索</span>
+            </a>
+            <a href="20260118 淺草・下町風情與雙塔絕景.html" class="day-card">
+                <span class="date">Day 09 | 01.18</span>
+                <span class="icon">🏮</span>
+                <span class="title">淺草下町風情・雙塔對望</span>
+            </a>
+            <a href="20260119 旅遊最後一天：東京 to 高雄.html" class="day-card">
+                <span class="date">Day 10 | 01.19</span>
+                <span class="icon">🏠</span>
+                <span class="title">東京告別・返回溫暖的家</span>
+            </a>
+        </div>
+    </section>
 
-    <div class="info-card">
-        <strong>⚠️ 數據說明：</strong><br>
-        目前為 2025/12/26，API 可提供至 2026/01/10 之前的精確預報。1/11 之後的數據為<strong>長期氣候預測值</strong>。當日期越接近您的出發日，數據會自動校正為短期高準確度預報，請持續關注。
-    </div>
+    <section>
+        <h2 style="border-bottom-color: #38a169;">🌤️ 旅行氣象看板</h2>
+        <div class="weather-panel">
+            <div class="controls">
+                <select id="locSelect" onchange="fetchData()">
+                    <optgroup label="城市區">
+                        <option value="35.6895,139.6917">📍 東京市區</option>
+                        <option value="35.4437,139.6380">🚢 橫濱</option>
+                    </optgroup>
+                    <optgroup label="觀光景點">
+                        <option value="35.3192,139.5467">🌊 鎌倉</option>
+                        <option value="35.9251,139.4858">🏺 川越</option>
+                        <option value="35.4981,138.7686" selected>🗻 河口湖</option>
+                        <option value="35.2324,139.1033">♨️ 箱根</option>
+                        <option value="36.7516,139.5985">⛩️ 日光</option>
+                        <option value="36.3484,138.6366">🛍️ 輕井澤</option>
+                    </optgroup>
+                </select>
+                
+                <select id="dateSelect" onchange="displayTable()"></select>
+            </div>
+
+            <div id="loading" class="loading">📡 正在接收即時氣象數據...</div>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>時間</th>
+                            <th>溫度</th>
+                            <th>預估天氣</th>
+                            <th>風速 (m/s)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="weatherBody"></tbody>
+                </table>
+            </div>
+
+            <div class="disclaimer">
+                <strong>⚠️ 數據說明：</strong><br>
+                氣象看板目前顯示「今日起 14 天內」的即時預報。Open-Meteo 提供高準確度的即時數據，建議於出發前一週再次確認細節。
+            </div>
+        </div>
+    </section>
+
 </div>
+
+<footer>
+    &copy; 2026 Tokyo Trip Planner. Have a nice trip!
+</footer>
 
 <script>
     let weatherData = null;
-    const END_DATE = "2026-01-10";
+    let startDate = "";
+    let endDate = "";
 
     function init() {
         const dateSelect = document.getElementById('dateSelect');
         const today = new Date();
-        const end = new Date(END_DATE);
         
-        // 生成從今天到 1/19 的日期選項
-        for (let d = new Date(today); d <= end; d.setDate(d.getDate() + 1)) {
+        // 設定起始日期 (今天)
+        startDate = today.toISOString().split('T')[0];
+        
+        // 設定結束日期 (目前日期 + 14 天)
+        const lastDay = new Date();
+        lastDay.setDate(today.getDate() + 14);
+        endDate = lastDay.toISOString().split('T')[0];
+        
+        // 清空並重新生成日期選項
+        dateSelect.innerHTML = "";
+        for (let d = new Date(today); d <= lastDay; d.setDate(d.getDate() + 1)) {
             const dateStr = d.toISOString().split('T')[0];
             const opt = document.createElement('option');
             opt.value = dateStr;
@@ -132,15 +357,15 @@
         const loading = document.getElementById('loading');
         loading.style.display = 'block';
 
-        const today = new Date().toISOString().split('T')[0];
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,windspeed_10m,weathercode&timezone=Asia%2FTokyo&start_date=${today}&end_date=${END_DATE}`;
+        // 動態使用 startDate 與 endDate
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,windspeed_10m,weathercode&timezone=Asia%2FTokyo&start_date=${startDate}&end_date=${endDate}`;
 
         try {
             const resp = await fetch(url);
             weatherData = await resp.json();
             displayTable();
         } catch (e) {
-            alert("API 連線超時或日期超出範圍，請重新整理。");
+            console.error(e);
         } finally {
             loading.style.display = 'none';
         }
@@ -155,7 +380,7 @@
         weatherData.hourly.time.forEach((timeStr, i) => {
             if (timeStr.startsWith(targetDate)) {
                 const hour = new Date(timeStr).getHours();
-                if (hour % 3 === 0) { // 每3小時顯示
+                if (hour % 3 === 0) {
                     const temp = weatherData.hourly.temperature_2m[i];
                     const wind = (weatherData.hourly.windspeed_10m[i] / 3.6).toFixed(1);
                     const code = weatherData.hourly.weathercode[i];
@@ -177,11 +402,11 @@
     }
 
     function getWeatherIcon(code) {
-        if (code === 0) return "☀️ 晴";
+        if (code === 0) return "☀️ 晴朗";
         if (code <= 3) return "☁️ 多雲";
         if (code >= 71) return "❄️ 雪/霜";
-        if (code >= 51) return "🌧️ 雨";
-        return "⛅ 陰";
+        if (code >= 51) return "🌧️ 降雨";
+        return "⛅ 陰天";
     }
 
     window.onload = init;
