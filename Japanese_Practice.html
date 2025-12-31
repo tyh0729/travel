@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日文五十音自主練習工具</title>
+    <style>
+        :root { --primary: #4a90e2; --success: #4caf50; --danger: #f44336; --bg: #f8f9fa; }
+        body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        #quiz-card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        
+        .mode-selector { margin-bottom: 20px; display: flex; justify-content: center; gap: 10px; }
+        .mode-btn { padding: 8px 16px; border: 2px solid var(--primary); background: white; color: var(--primary); border-radius: 20px; cursor: pointer; font-weight: bold; }
+        .mode-btn.active { background: var(--primary); color: white; }
+
+        /* 筆順顯示區 */
+        #stroke-display {
+            margin: 15px auto;
+            width: 150px;
+            height: 150px;
+            background: #fff;
+            border: 2px dashed #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+        }
+        #stroke-img { max-width: 90%; max-height: 90%; display: none; }
+        .placeholder-text { color: #bbb; font-size: 0.9rem; }
+
+        #play-voice { background: var(--primary); color: white; border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; margin-bottom: 15px; }
+        
+        .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .option { padding: 18px; font-size: 2rem; border: 2px solid #eee; border-radius: 12px; background: white; cursor: pointer; }
+        .option.correct { background-color: var(--success) !important; color: white; border-color: var(--success); }
+        .option.wrong { background-color: var(--danger) !important; color: white; border-color: var(--danger); }
+        
+        /* 下一題按鈕 */
+        #next-btn {
+            display: none; /* 初始隱藏 */
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #next-btn:hover { background-color: #000; }
+
+        .stat-bar { display: flex; justify-content: space-between; margin-top: 20px; font-size: 0.8rem; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div id="quiz-card">
+    <div class="mode-selector">
+        <button class="mode-btn active" onclick="setMode('hira', this)">平假名</button>
+        <button class="mode-btn" onclick="setMode('kata', this)">片假名</button>
+    </div>
+
+    <div id="stroke-display">
+        <img id="stroke-img" src="" alt="筆順圖">
+        <div id="placeholder" class="placeholder-text">答題後顯示正確筆順</div>
+    </div>
+
+    <button id="play-voice">🔊</button>
+    
+    <div class="options-grid" id="options-container"></div>
+
+    <button id="next-btn" onclick="nextQuestion()">下一題 →</button>
+
+    <div class="stat-bar">
+        <span>練習次數: <strong id="total-count">0</strong></span>
+        <span>正確率: <strong id="accuracy">0%</strong></span>
+    </div>
+</div>
+
+<script>
+    const data = {
+        hira: ['あ','い','う','え','お','か','き','く','け','こ','さ','し','す','せ','そ','た','ち','つ','て','と','な','に','ぬ','ね','の','は','ひ','ふ','へ','ほ','ま','み','む','め','も','や','ゆ','よ','ら','り','る','れ','ろ','わ','を','ん'],
+        kata: ['ア','イ','ウ','エ','オ','カ','キ','ク','ケ','科','サ','シ','ス','セ','ソ','タ','チ','ツ','テ','ト','ナ','ニ','ヌ','ネ','ノ','ハ','ヒ','フ','ヘ','ホ','マ','ミ','ム','メ','モ','ヤ','ユ','ヨ','ラ','リ','ル','レ','ロ','ワ','ヲ','ン']
+    };
+
+    let currentMode = 'hira';
+    let correctAnswer = '';
+    let stats = { total: 0, correct: 0 };
+    let isAnswering = false;
+
+    function setMode(mode, btn) {
+        currentMode = mode;
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        nextQuestion();
+    }
+
+    function playSound(text) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.lang = 'ja-JP';
+        msg.rate = 0.8;
+        window.speechSynthesis.speak(msg);
+    }
+
+    function nextQuestion() {
+        isAnswering = false;
+        
+        // 重置介面
+        document.getElementById('stroke-img').style.display = 'none';
+        document.getElementById('placeholder').style.display = 'block';
+        document.getElementById('next-btn').style.display = 'none'; // 隱藏下一題按鈕
+
+        const list = data[currentMode];
+        correctAnswer = list[Math.floor(Math.random() * list.length)];
+        
+        let choices = [correctAnswer];
+        while(choices.length < 4) {
+            let rand = list[Math.floor(Math.random() * list.length)];
+            if(!choices.includes(rand)) choices.push(rand);
+        }
+        choices.sort(() => Math.random() - 0.5);
+
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        choices.forEach(char => {
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.innerText = char;
+            btn.onclick = () => checkAnswer(char, btn);
+            container.appendChild(btn);
+        });
+
+        playSound(correctAnswer);
+    }
+
+    function checkAnswer(selected, btnElement) {
+        if(isAnswering) return;
+        isAnswering = true;
+        stats.total++;
+
+        // 顯示筆順圖
+        const img = document.getElementById('stroke-img');
+        const placeholder = document.getElementById('placeholder');
+        const hexCode = correctAnswer.charCodeAt(0).toString(16).padStart(5, '0');
+        img.src = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+        img.style.display = 'block';
+        placeholder.style.display = 'none';
+
+        // 顯示下一題按鈕
+        document.getElementById('next-btn').style.display = 'block';
+
+        const allButtons = document.querySelectorAll('.option');
+        if(selected === correctAnswer) {
+            btnElement.classList.add('correct');
+            stats.correct++;
+        } else {
+            btnElement.classList.add('wrong');
+            allButtons.forEach(b => { if(b.innerText === correctAnswer) b.classList.add('correct'); });
+        }
+
+        document.getElementById('total-count').innerText = stats.total;
+        document.getElementById('accuracy').innerText = Math.round((stats.correct / stats.total) * 100) + '%';
+    }
+
+    document.getElementById('play-voice').onclick = () => playSound(correctAnswer);
+    nextQuestion();
+</script>
+</body>
+</html>
